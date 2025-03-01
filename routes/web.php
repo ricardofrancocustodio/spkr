@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SavequestionsController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\RecordingsController;
 use App\Http\Controllers\EvaluationController;
 
 Route::get('/', function () {
@@ -34,7 +35,7 @@ Route::any('evaluationedit/edit/{id}', [EvaluationController::class, 'evaluation
 Route::post('evaluationupdate/update/{id}', [EvaluationController::class, 'evaluationupdate'])->name('evaluationupdate');
 
 //Routes redirecting to an URL
-Route::get('/recordings/list', [TestController::class, 'recordingslist'])->name('recordingslist');
+Route::get('/recordings/list', [RecordingsController::class, 'recordingsindex'])->name('recordingslist');
 Route::post('/profile/myinfo', [ProfileController::class, 'index'])->name('myinfo');
 Route::get('/evaluationtest', [EvaluationController::class, 'index'])->name('evaluationtest');
 Route::post('getquestionlist', [EvaluationController::class, 'getquestionlist'])->name('getquestionlist');

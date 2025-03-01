@@ -2,68 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Plan;
-use App\Test;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display the user's profile form.
      */
-    public function index (Request $request)
+    public function edit(Request $request): View
     {
-        
-    $profileOfUser          = DB::table('users')
-                                  ->join('plans', 'users.id_plan', '=', 'plans.id_plan')
-                                    ->find(auth()->user()->id);
-                                        //dd($profileOfUser->imgprofile_data);
-     // dd($profileOfUser );
-      
-        return view('profile.myinfo', ['profileOfUser' => $profileOfUser]);
-        
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 
-
-    public function sendimgtoserver (Request $request)
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        //dd($request->imgprofile_data);
-         
-               $updateprofileimg       =  DB::table('users')
-                                            ->where('id', Auth::id() )
-                                            ->update(['imgprofile_data' => $request->imgprofile_data]);
-        
+        $request->user()->fill($request->validated());
 
-                $imageUploaded          = User::select('imgprofile_data', 'id')
-                                                        ->where('id', Auth::id())
-                                                        ->get();
-                
-                $profileOfUser          = User::join('plans', 'users.id_plan', '=', 'plans.id_plan')
-                                                ->find(Auth::id());
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
 
-                if($imageUploaded){
+        $request->user()->save();
 
-                    return view('profile.myinfo', ['imageUploaded' => $imageUploaded], ['profileOfUser' => $profileOfUser])->withMessage('Success','Your updates have been saved');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
 
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
 
-                } else {
+        $user = $request->user();
 
-                    return redirect()->back()->with('fail','Something went wrong');
-                }
-        
-     }
-    
+        Auth::logout();
 
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
 }
-
-
-?>

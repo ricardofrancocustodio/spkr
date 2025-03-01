@@ -26,7 +26,7 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function testindex(Request $request)
     {
         $userID    = auth()->user()->id; 
 
@@ -44,7 +44,7 @@ class TestController extends Controller
         if ($question1 == null){return redirect()->to('/successpage'); }
             
         
-        return view('test.index', ['question1' => $question1, 'userID' => $userID]);
+        return view('test/testindex', ['question1' => $question1, 'userID' => $userID]);
 
     }
 
@@ -130,7 +130,7 @@ class TestController extends Controller
           //  if (!$recordinglistAccountance || $recordinglistAviation){return redirect()->to('/recordings/norecordings'); }
 
 
-        return view('recordings.list', ['recordinglistAccountance' => $recordinglistAccountance, 'recordinglistAviation' => $recordinglistAviation] ?? null);
+        return view('recordings/list', ['recordinglistAccountance' => $recordinglistAccountance, 'recordinglistAviation' => $recordinglistAviation] ?? null);
         
 
     }

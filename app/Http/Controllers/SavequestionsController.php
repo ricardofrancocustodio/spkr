@@ -40,7 +40,7 @@ class SavequestionsController extends Controller
      
    
    //GET METHODS
-    return redirect()->action([TestController::class, 'index'], ['id_practice_test' => $request->id_practice_test]);
+    return redirect()->action([TestController::class, 'testindex'], ['id_practice_test' => $request->id_practice_test]);
    //return redirect()->route('index');
   // return redirect()->to('/test/selectyourtest');
         

@@ -10,7 +10,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('General instructions') }} - <b style="color: red;">Attention!!! </b></div>
+                <div class="card-header">{{ __('General instructions') }} - <b style="color: yellow;">Attention!!! </b></div>
                 <br>
                    <!--  <h1>Instructions for  Tests </h1>   <br> -->
 

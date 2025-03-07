@@ -20,10 +20,8 @@ return new class extends Migration
             $table->string('id_user');
             $table->string('id_exam_type');
             $table->string('id_practice_test');
-            //$table->string('email')->unique();
-            //$table->timestamp('email_verified_at')->nullable();
-            // $table->string('password');
-            // $table->rememberToken();
+            $table->string('id_tenant');
+            $table->string('id_company');
             $table->timestamps();
         });
     }

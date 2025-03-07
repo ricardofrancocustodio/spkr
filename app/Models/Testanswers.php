@@ -19,8 +19,14 @@ class Testanswers extends Model
 
     protected $fillable = [
         'id_evaluation',
+        'id_tenant',
+        'id_company',
         'id_question',
-        'recorded_answer',
+        'id_question_type',
+        'id_time_question',
+        'id_exam_type',
+        'id_practice_test',
+        'id_test_type',
     ];
 
     public $timestamps = true;

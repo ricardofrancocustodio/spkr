@@ -16,6 +16,9 @@ return new class extends Migration
     {
         Schema::create('question', function (Blueprint $table) {
             $table->id('id_question');
+            $table->string('id_question_type');
+            $table->string('id_tenant');
+            $table->string('id_company');
             $table->string('question_text');
             $table->string('img_question')->nullable();
             $table->string('audio_question')->nullable();

@@ -16,6 +16,20 @@ class Question extends Model
      */
     protected $table = 'question';
     protected $primaryKey = 'id_question';
+    
+    protected $fillable = [
+        'id_question_type',
+        'id_question',
+        'recorded_answer',
+        'id_tenant',    
+        'id_company',
+        'question_text',
+        'img_question',
+        'question_audio',
+        'question_video',
+        
+    ];
+    
     public $timestamps = true;
 }
 

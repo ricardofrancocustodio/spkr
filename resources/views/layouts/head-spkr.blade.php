@@ -17,8 +17,8 @@
         <!-- Nunito Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Recordings List CSS 
-        <link rel="stylesheet" href="{{ asset('css/css.css') }}">-->
+        <!-- Recordings List CSS -->
+        <link rel="stylesheet" href="{{ asset('css/css.css') }}">
 
         <!-- Pulse Effect CSS -->
         <link rel="stylesheet" href="{{ asset('css/pulseeffect.css') }}">

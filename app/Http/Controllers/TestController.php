@@ -30,7 +30,7 @@ class TestController extends Controller
     {
         $userID    = auth()->user()->id; 
 
-        $question  = Question::select('question_text', 'id_practice_test', 'id_question', 'id_exam_type', 'id_time_question', 'audio_question', 'img_question')
+        $question  = Question::select('question_text', 'id_practice_test', 'id_question', 'id_exam_type', 'id_time_question', 'audio_question', 'img_question', 'id_tenant', 'id_company')
                         ->where('id_practice_test', $request->id_practice_test)
                         ->whereNotIn('id_question', function($query){
                             $query->select('id_question')

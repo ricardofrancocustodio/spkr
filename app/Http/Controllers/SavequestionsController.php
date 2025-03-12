@@ -32,6 +32,8 @@ class SavequestionsController extends Controller
         $userResponseAnswer->id_exam_type     = $request->id_exam_type;
         $userResponseAnswer->id_practice_test = $request->id_practice_test;
         $userResponseAnswer->recorded_audio   = $request->recordedAudio;
+        $userResponseAnswer->id_tenant        = $request->id_tenant;
+        $userResponseAnswer->id_company       = $request->id_company;
         $userResponseAnswer->save();
      
         $id_practice_test           = $request->id_practice_test;    

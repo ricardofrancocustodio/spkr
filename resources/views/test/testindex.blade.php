@@ -46,6 +46,8 @@
                                 <input type="hidden" name="id_user" value="{{ $userID }}">
                                 <input type="hidden" name="id_question" value="{{ $question1['id_question'] }}">
                                 <input type="hidden" name="id_exam_type" value="{{ $question1['id_exam_type'] }}">
+                                <input type="hidden" name="id_tenant" value="{{ $question1['id_tenant'] }}">
+                                <input type="hidden" name="id_company" value="{{ $question1['id_company'] }}">
                                 <button type="submit" class="quiz-btn quiz-btn-primary">Next Question</button>
                             </form>
 

@@ -21,30 +21,28 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 1%">#</th>
-                                                <th style="width: 20%">Practice Test</th>
                                                 <th style="width: 30%">Question</th>
-                                                <th>Recorded Audio</th>
-                                                <th style="width: 8%" class="text-center">Actions</th>
+                                                <th style="width: 30%">Recorded Audio</th>
+                                                <th style="width: 15%" class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($recordinglist as $key => $recording)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $recording['practice_test_name'] }}</td>
-                                                    <td>{{ $recording['question_text'] }}</td>
+                                                    <td>{{ $recording->question->question_text }}</td>
                                                     <td>
                                                         <audio controls>
-                                                            <source src="{{ asset('storage/' . $recording['recorded_audio']) }}" type="audio/mpeg">
+                                                            <source src="{{ $recording->recorded_audio }}" type="audio/mpeg">
                                                             Your browser does not support the audio element.
                                                         </audio>
                                                     </td>
                                                     <td class="project-actions text-right">
                                                         <a class="btn btn-primary btn-sm" href="{{ asset('storage/' . $recording['recorded_audio']) }}" download>
-                                                            <i class="fas fa-download"></i> Download
+                                                            <i class="fas fa-download"></i> &nbsp;&nbsp;
                                                         </a>
                                                         <a class="btn btn-danger btn-sm" href="#">
-                                                            <i class="fas fa-trash"></i> Delete
+                                                            <i class="fas fa-trash"></i> 
                                                         </a>
                                                     </td>
                                                 </tr>

@@ -50,7 +50,7 @@
                                 <!-- ./card -->
                             </div>
                             
-                            <form action="{{ url('testindex') }}" method="POST" style="width: 100%;">
+                            <form action="{{ route('testindex') }}" method="POST" style="width: 100%;">
                                  @csrf
                                 <input type="hidden" name="id_practice_test" value="1">
                                 <input type="hidden" name="id_user" value="{{ auth()->user()->id }}"><br>

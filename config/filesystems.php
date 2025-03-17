@@ -38,6 +38,17 @@ return [
             'report' => false,
         ],
 
+        'spaces' => [
+            'driver' => 's3',
+            'key' => env('DO_SPACES_KEY'),
+            'secret' => env('DO_SPACES_SECRET'),
+            'region' => env('DO_SPACES_REGION'),
+            'bucket' => env('DO_SPACES_BUCKET'),
+            'endpoint' => 'https://nyc3.digitaloceanspaces.com',
+            'visibility' => 'public', // ou 
+            //'url' => env('DO_SPACES_URL', env('DO_SPACES_ENDPOINT') . '/'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -62,6 +73,7 @@ return [
 
     ],
 
+   
     /*
     |--------------------------------------------------------------------------
     | Symbolic Links
@@ -76,5 +88,6 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+    
 
 ];

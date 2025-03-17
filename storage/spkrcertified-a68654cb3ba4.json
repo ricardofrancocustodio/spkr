@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "spkrcertified",
+  "private_key_id": "a68654cb3ba45cb8f9944120baea5a4fe874146c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCc8ykr0H8KqOzd\nM8UxsT/154JxwUkFL61/+UVqlkQvUPUqiGFxCWiS+S6K7JelEkqsZm3k3v2xQmWb\nJjM1p+/t57I4aXKDgOJ4RhFbu9Hbq0JAQpZBhKhEuOwXOAi6XSOWYy+h6zbaGpFX\nvuJdLJG8VZdv60QaGoofjqnxKPNQ9MiBQafhP7F6a57XVNy21kEc79KHD3MMlSfm\n1zG9rYH5EIorsCTSB/j+As3pPNtxWe8qji5tT7c7lIl03rChvmQGIH079/9pOg4D\nYSMLW6FvUbVVsmAtiz9IpI9Eq8ZwKziHNH43cySoV/QBl7G2/bNfXM/1jGQN4HHz\n/rvWdTMvAgMBAAECggEARS7YeKRMw82nr3AJHfj0aThWIz+gqOUV1SHzi+LWBodo\nsolwbmvHyXWGox1cURrJiMoT6f2zlWXftO63RxESbWui/0PYAwiWi47TSvz1KiAJ\nMZtIcXQA2l4rT6bXDhNNQxbQoc61nJl2dNfDH3Asg3i1KtPpbppBRVzVI2U6L/Yt\nVj6WILe/u++3FfMBKCd7BxUxnDgINKWsc5oOHXS5d4QvQ00YTEKWn7zk5CBBej0o\nDCynuxqcPiB0ZAs7ekSjqU0kwJJ+zHtLh+YEPsFT2iDsyW59u7bFpBDbb/prSaZz\nEFoCapf7S7e2q+QlyQDzVidXE3DUIyBnpu3JZvZoYQKBgQDbYiH479l1QkUihlZW\newR7F8kgAe1dRlNYESD96EhQBPiJCbW4ajnSftvTq5Nfou54EVKTqVJ14Ze4q7ms\nOCgMOWEVcJ8FYqNwcebgfkLqdkuC7hCCd02Ugi55QiS2OXVFFdi4nvlOIo8fUTx3\na4Sc0gfR+VPT17siXSZbejqaoQKBgQC3JVqsEI25I/bD8HRcfm1Gue1Q/49jzLxr\nvo+Cs8VqaveWBH8qcMrAwe3apz9VVV9u2G4fC7Hdt8FkwNXwpqSfyJfhyVMth6cz\nMhX5ykSWfaCqSoBmB2jA9jrk/jn9u2u7kB3cqDucxhox8rNlLM9AXEbXq1vyfft+\npEVrrKVLzwKBgQCDdIvyxJXDI5CVnXWCoHgQ4jHMEhuPNqKeNLVWL6eU+0WJp93R\nwSUgso86iKboOZM3MvoOLPmSVTk6mPvK7GNi38cCt9cxvOc+a6HyhvXF1Fhu/gO6\niY5dHJyIYE/rOQbB/NM93VR5s0+bbmwTCsQNy/SPpxzJ5YzmjHZ9fgI7wQKBgQCA\n6BnZ4gzesyGM6EH+mD3x+gu/ZyFV7VTxwT7hkAbz0DZTsPaQuLL82YLA09cQCPcS\n3eMkluaqWBwW/mOW7rQQgu/kS//vm/tjXW16U5PTGLltIuMc7ToeFzF83DOVE8XQ\nTq+2D/NldUoavejm3ZNCibCTPFmLZIEPsi/qiaoOoQKBgGfxVzTyoeHrDFLqPfT9\nciweHN8wCFkg7GnlFDmwsJlVBAdrmVlsyQwZF3U4WpZSyh0i7mpSz1PXtR7g/fdv\n0cXakfjvi18Q2FEqCEzuZWRRnbdpHpERopx0V66ZrIutIalIwHsKaTXXiO2801Wu\nW5ZDQ05/EwQPoC1UPQct1+j7\n-----END PRIVATE KEY-----\n",
+  "client_email": "laravel-gcs@spkrcertified.iam.gserviceaccount.com",
+  "client_id": "113536668959749766984",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/laravel-gcs%40spkrcertified.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

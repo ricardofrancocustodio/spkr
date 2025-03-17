@@ -7,6 +7,7 @@ use App\Http\Controllers\SavequestionsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RecordingsController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\AudioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,13 +27,18 @@ Route::middleware('auth')->group(function () {
 Route::post('deleteanswer', [TestController::class, 'deleteanswer'])->name('deleteanswer');
 Route::post('deleteselectedanswer', [TestController::class, 'deleteselectedanswer'])->name('deleteselectedanswer');
 Route::post('deleteallanswers', [TestController::class, 'deleteallanswers'])->name('deleteallanswers');
-Route::any('testindex', [TestController::class, 'testindex'])->name('testindex');
-Route::post('savequestions', [SavequestionsController::class, 'savequestions'])->name('savequestions');
+Route::post('testindex', [TestController::class, 'testindex'])->name('testindex');
+//Route::post('savequestions', [SavequestionsController::class, 'savequestions'])->name('savequestions');
+Route::post('savequestions', [SavequestionsController::class, 'savequestions'])
+    ->name('savequestions')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
 Route::post('sendimgtoserver', [ProfileController::class, 'sendimgtoserver'])->name('sendimgtoserver');
 Route::post('evaluationstore', [EvaluationController::class, 'evaluationstore'])->name('evaluationstore');
 Route::any('evaluationshow/view/{id}', [EvaluationController::class, 'evaluationshow'])->name('evaluationshow');
 Route::any('evaluationedit/edit/{id}', [EvaluationController::class, 'evaluationedit'])->name('evaluationedit');
 Route::post('evaluationupdate/update/{id}', [EvaluationController::class, 'evaluationupdate'])->name('evaluationupdate');
+Route::post('/upload-audio', [AudioController::class, 'upload']);
+
 
 //Routes redirecting to an URL
 Route::get('/recordings/list', [RecordingsController::class, 'recordingsindex'])->name('recordingslist');

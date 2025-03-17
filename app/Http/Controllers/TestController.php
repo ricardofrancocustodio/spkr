@@ -28,9 +28,10 @@ class TestController extends Controller
      */
     public function testindex(Request $request)
     {
+        //dd($request);  
         $userID    = auth()->user()->id; 
 
-        $question  = Question::select('question_text', 'id_practice_test', 'id_question', 'id_exam_type', 'id_time_question', 'audio_question', 'img_question', 'id_tenant', 'id_company')
+        $query  = Question::select('question_text', 'id_practice_test', 'id_question', 'id_exam_type', 'id_time_question', 'audio_question', 'img_question', 'id_tenant', 'id_company')
                         ->where('id_practice_test', $request->id_practice_test)
                         ->whereNotIn('id_question', function($query){
                             $query->select('id_question')
@@ -38,13 +39,13 @@ class TestController extends Controller
                         },)
                     ->get();
         
-        $question1 = $question->first();
+        $question = $query->first();
         
        // dd($request);                                   
-        if ($question1 == null){return redirect()->to('/successpage'); }
+        if ($question == null){return redirect()->to('/successpage'); }
             
         
-        return view('test/testindex', ['question1' => $question1, 'userID' => $userID]);
+        return view('test/testindex', ['question' => $question, 'userID' => $userID]);
 
     }
 

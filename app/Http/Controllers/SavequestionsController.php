@@ -3,51 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Test;
-use App\Questionhasanswer;
-use App\Models\Question;
 use App\Models\Answer;
-use App\Models\UserHasRespondedQuestions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Str;
+
 
 class SavequestionsController extends Controller
 {
 
     public function savequestions(Request $request)
     {
-        //dd($request->recordedAudio);
+        //dd(request()->all());
+        if (!$request->hasFile('recordedAudio')) {
+            return response()->json(['error' => 'Nenhum arquivo enviado'], 400);
+        }
 
+        $id_user = $request->input('id_user');
+        $id_question = $request->input('id_question');
+        $id_exam_type = $request->input('id_exam_type');
+        $id_practice_test = $request->input('id_practice_test');
+        $id_tenant = $request->input('id_tenant');
+        $id_company = $request->input('id_company');
+        $recordedAudio = $request->file('recordedAudio');
+
+
+        // Define um nome único e cria uma pasta por usuário
+        $filePath = $id_user. time() . '-' . uniqid() . '.opus';
+
+        // Salvar no DigitalOcean Spaces
+        Storage::disk('spaces')->put($filePath, file_get_contents($recordedAudio), 'public');
+        
+
+        // Obtém a URL pública correta usando a configuração do Laravel
+        //$fileUrl = config('filesystems.disks.spaces.endpoint') . '/' . $filePath;
+        $fileUrl = Storage::disk('spaces')->url($filePath);
+        
         $userResponseAnswer                   = new Answer();
-        $userResponseAnswer->id_user          = Auth::id();
-        $userResponseAnswer->id_question      = $request->id_question;
-        $userResponseAnswer->id_exam_type     = $request->id_exam_type;
-        $userResponseAnswer->id_practice_test = $request->id_practice_test;
-        $userResponseAnswer->recorded_audio   = $request->recordedAudio;
-        $userResponseAnswer->id_tenant        = $request->id_tenant;
-        $userResponseAnswer->id_company       = $request->id_company;
+        $userResponseAnswer->id_user          = $id_user;
+        $userResponseAnswer->id_question      = $id_question;
+        $userResponseAnswer->id_exam_type     = $id_exam_type;
+        $userResponseAnswer->id_practice_test = $id_practice_test;
+        $userResponseAnswer->id_tenant        = $id_tenant;
+        $userResponseAnswer->id_company       = $id_company;
+        $userResponseAnswer->recorded_audio   = $fileUrl;  // Agora salva só a URL
         $userResponseAnswer->save();
      
-        $id_practice_test           = $request->id_practice_test;    
-    //retorna direto na blade sem passar pelo controller
-    //return view('test.index', ['id_practice_test' => $id_practice_test ]);
-     
-   
-   //GET METHODS
-    return redirect()->action([TestController::class, 'testindex'], ['id_practice_test' => $request->id_practice_test]);
-   //return redirect()->route('index');
-  // return redirect()->to('/test/selectyourtest');
-        
-        
-    //return redirect()->route('index');
+    
+    /// Gera a URL para a próxima questão
+        $nextQuestionUrl = route('testindex', ['id_practice_test' => $id_practice_test]);
+
+        // Retorna resposta JSON com a URL corrigida
+        return response()->json([
+            'success' => true,
+            'audio_url' => $fileUrl,
+            'next_question_url' => $nextQuestionUrl
+        ]);
 
 
     }

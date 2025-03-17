@@ -1,71 +1,4 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tests') }}
-        </h2>
-    </x-slot>
-
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
-                <div id="container">
-                    <!-- Caixa da Pergunta -->
-                    <div class="quiz-question-box">
-                        <p id="question-text" style="color:black; font-size:20px; font-weight:bold;">{{ $question['question_text'] }}</p>
-                        <br><br>
-                        <!-- Imagem da Pergunta -->
-                            <!-- <button id="record-button" class="quiz-record-btn">🎤 Recording</button>  -->              
-                            <div class="blobs-container" style="">
-                                @if($question['img_question'])
-                                    <div id="image-container" class="{{ $question['img_question'] ? '' : 'hidden' }}" style="">
-                                        <img id="question-image" src="{{ asset($question['img_question']) }}" alt="Question Image" class="quiz-image" style="width: 30%; height: 30%;">
-                                    </div>
-                                @endif
-                                <div class="">
-                                    <div class="blob red" id="pulseeffect">
-                                        <span style="color:white; font-size:50px;" id="timeleft"></span>
-                                    </div>
-                                    <span style="color:red;" id="timer"><b></b></span>
-                                </div>
-                            </div>     
-                        
-                        <!-- Áudio da Pergunta -->
-                        <div id="audio-container" class="hidden">
-                            <audio controls id="question-audio">
-                                <source src="" type="audio/mpeg">
-                                Your browser does not support the audio tag.
-                            </audio>
-                        </div>
-                        <br>
-                        <br>
-                    <!-- Botões de Navegação -->
-                        <div class="quiz-buttons">
-                            <form method="POST" action="{{ route('savequestions') }}" id="savequestions">
-                                @csrf
-                                <input type="hidden" name="id_practice_test" value="{{ $question['id_practice_test'] }}">
-                                <input type="hidden" name="id_user" value="{{ $userID }}">
-                                <input type="hidden" name="id_question" value="{{ $question['id_question'] }}">
-                                <input type="hidden" name="id_exam_type" value="{{ $question['id_exam_type'] }}">
-                                <input type="hidden" name="id_tenant" value="{{ $question['id_tenant'] }}">
-                                <input type="hidden" name="id_company" value="{{ $question['id_company'] }}">
-                                <button type="submit" class="quiz-btn quiz-btn-primary">Next Question</button>
-                            </form>
-
-                            <form method="POST" action="deleteallanswers">
-                                @csrf
-                                <button type="submit" class="quiz-btn quiz-btn-secondary">Retake Question</button>
-                            </form>
-
-                            <button id="stop-test" class="quiz-btn quiz-btn-danger">Stop Test</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-           function speakText(text, callback) {
+function speakText(text, callback) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.onend = function() {
         console.log("Texto falado completamente.");
@@ -126,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById("timeleft").innerHTML = timeleft;
                 }
                 timeleft -= 1;
-                console.log("Timeleft: ", timeleft);
             }, 1000);
 
             // Iniciar gravação de áudio
@@ -150,21 +82,15 @@ document.addEventListener("DOMContentLoaded", function() {
                         document.getElementById('timer').innerHTML = 'stopped';
 
                         let blob = new Blob(audioChunks, { type: 'audio/ogg; codecs=opus' });
-                        let form = document.getElementById('savequestions');
-                        let formData = new FormData(form);
+                        let formData = new FormData();
                         formData.append("recordedAudio", blob, "audio.ogg");  
                         formData.append("id_question", document.querySelector("input[name=id_question]").value);
                         formData.append("id_exam_type", document.querySelector("input[name=id_exam_type]").value);
                         formData.append("id_practice_test", document.querySelector("input[name=id_practice_test]").value);
                         formData.append("_token", document.querySelector("input[name=_token]").value);
 
-                        console.log(formData);
-
                         fetch("{{ route('savequestions') }}", {
                             method: "POST",
-                            headers: {
-                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                                    },
                             body: formData
                         })
                         .then(response => response.json())
@@ -190,8 +116,3 @@ document.addEventListener("DOMContentLoaded", function() {
     // Iniciar leitura da questão automaticamente quando a página carregar
     loadAudioQuestion();
 });
-
-    </script>
-  
-    
-</x-app-layout>

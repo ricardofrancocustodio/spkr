@@ -27,11 +27,10 @@ Route::middleware('auth')->group(function () {
 Route::post('deleteanswer', [TestController::class, 'deleteanswer'])->name('deleteanswer');
 Route::post('deleteselectedanswer', [TestController::class, 'deleteselectedanswer'])->name('deleteselectedanswer');
 Route::post('deleteallanswers', [TestController::class, 'deleteallanswers'])->name('deleteallanswers');
-Route::post('testindex', [TestController::class, 'testindex'])->name('testindex');
-//Route::post('savequestions', [SavequestionsController::class, 'savequestions'])->name('savequestions');
-Route::post('savequestions', [SavequestionsController::class, 'savequestions'])
-    ->name('savequestions')
-    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+//Route::post('testindex', [TestController::class, 'testindex'])->name('testindex');
+Route::match(['GET', 'POST'], '/testindex', [TestController::class, 'testindex'])->name('testindex');
+Route::post('savequestions', [SavequestionsController::class, 'savequestions'])->name('savequestions');
+//Route::post('savequestions', [SavequestionsController::class, 'savequestions'])->name('savequestions')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
 Route::post('sendimgtoserver', [ProfileController::class, 'sendimgtoserver'])->name('sendimgtoserver');
 Route::post('evaluationstore', [EvaluationController::class, 'evaluationstore'])->name('evaluationstore');
 Route::any('evaluationshow/view/{id}', [EvaluationController::class, 'evaluationshow'])->name('evaluationshow');

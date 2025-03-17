@@ -36,7 +36,6 @@ class SavequestionsController extends Controller
         // Salvar no DigitalOcean Spaces
         Storage::disk('spaces')->put($filePath, file_get_contents($recordedAudio), 'public');
         
-
         // Obtém a URL pública correta usando a configuração do Laravel
         //$fileUrl = config('filesystems.disks.spaces.endpoint') . '/' . $filePath;
         $fileUrl = Storage::disk('spaces')->url($filePath);
@@ -50,17 +49,21 @@ class SavequestionsController extends Controller
         $userResponseAnswer->id_company       = $id_company;
         $userResponseAnswer->recorded_audio   = $fileUrl;  // Agora salva só a URL
         $userResponseAnswer->save();
-     
+   //GET METHODS
+       // return redirect()->action([TestController::class, 'testindex']);
+  
+       return response()->json([
+        'success' => true,
+        'audio_url' => $fileUrl,
+        'next_question_url' => route('testindex', ['id_practice_test' => $id_practice_test])
+    ]);
     
-    /// Gera a URL para a próxima questão
-        $nextQuestionUrl = route('testindex', ['id_practice_test' => $id_practice_test]);
 
-        // Retorna resposta JSON com a URL corrigida
-        return response()->json([
-            'success' => true,
-            'audio_url' => $fileUrl,
-            'next_question_url' => $nextQuestionUrl
-        ]);
+    //return redirect()->route('index');
+  // return redirect()->to('/test/selectyourtest');
+        
+        
+    //return redirect()->route('index');
 
 
     }
